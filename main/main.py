@@ -19,8 +19,12 @@ startTime = time.time()
 for index, document in enumerate(doc):
     paper = {}
     paper["id"] = document["id"]
+    paper["identifier"] = document["title"]
     paper["datatype"] = "policy"
+    paper["url"] = document["url"]
+    paper["author_keywords"] = document["author_keywords"]
     paper["date_publication"] = document["date_publication"][:4]
+
     #status有的以\r结尾
     paper["status"] = document["status"].replace("\r","")
     nodes.append(paper)
@@ -35,8 +39,8 @@ for index, document in enumerate(doc):
                 if(ct > 0.3):
                     #print ct
                     edge = {}
-                    edge["source"] = document["id"]
-                    edge["target"] = document1["id"]
+                    edge["source"] = document["title"]
+                    edge["target"] = document1["title"]
                     edge["type"] = "relation"
                     edge["value"] = ct
                     links.append(edge)
